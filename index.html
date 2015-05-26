@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modal Demo</title>
+  <link rel="stylesheet" href="./src/modal.css">
+  <style media="screen">
+    body {
+      background-color: #FDFBD6;
+    }
+    .wrap {
+      text-align: center;
+    }
+    .intro {
+      padding: 30px 50px;
+      color: #8E8E8B;
+      font-size: 14px;
+    }
+    .nc-btn {
+      outline: none;
+      padding: 8px 15px;
+      font-size: 12px;
+      color: #ffffff;
+      text-align: center;
+      cursor: pointer;
+    }
+    .laodongzhe {
+      background-color: #2893CA;
+      border-radius: 15px;
+      border: 1px solid #007FC9;
+    }
+    .laodongziliao {
+      background-color: #7BB43D;
+      border-radius: 15px;
+      border: 1px solid #63A900;
+    }
+    .laodongduixiang {
+      background-color: #E7AA22;
+      border-radius: 15px;
+      border: 1px solid #E6A400;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="wrap">
+      <div class="intro">
+        人类利用自然、改造自然，从自然界获取物质资料的能力就是生产力，它包括三个相互作用、有机结合的基本要素，即劳动者、劳动资料和劳动对象。
+      </div>
+      <button type="button" class="nc-btn laodongzhe nc-modal-trigger" data-modalid="laodongzhe">劳动者</button>
+      <div class="nc-modal" id="laodongzhe">
+        <div class="nc-modal-dialog">
+          <h3>劳动者</h3>
+          <div class="nc-modal-content">
+            <p>名词。字面意义为“劳动的人”，是对从事劳作活动一类人的统称。劳动者是一个涵义非常广泛的概念，凡是具有劳动能力，以从事劳动获取合法收入作为生活资料来源的公民都可称为劳动者。不同的学科对于劳动者这一概念具有不同的界定，而且在不同的社会制度和社会体制下，关于劳动者概念的理解也各不相同。</p>
+            <button class="nc-modal-close">close modal!</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="nc-btn laodongziliao nc-modal-trigger" data-modalid="laodongziliao">劳动资料</button>
+      <div class="nc-modal" id="laodongziliao">
+        <div class="nc-modal-dialog">
+          <h3>劳动资料</h3>
+          <div class="nc-modal-content">
+            <p>劳动资料的使用和创造，是人类劳动过程的特征。各种经济时代的区别，不在于生产什么，而在于怎样生产，用什么劳动资料生产。劳动资料不仅是人类劳动力发展的测量器，而且是劳动借以进行的社会关系的指示器。在劳动资料中，机械性的劳动资料比那些只是充当劳动对象容器的劳动资料（如管、桶、篮、罐等）更能显示一个社会生产时代的具有决定意义的特征</p>
+            <button class="nc-modal-close">close modal!</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="nc-btn laodongduixiang nc-modal-trigger" data-modalid="laodongduixiang">劳动对象</button>
+      <div class="nc-modal" id="laodongduixiang">
+        <div class="nc-modal-dialog">
+          <h3>劳动对象</h3>
+          <div class="nc-modal-content">
+            <p>劳动对象是人们把自己的劳动加在其上的一切物质资料。分为两类：一是没有经过人们加工的自然界物质，如矿藏；另一类是经过人们加工的原材料，如棉花、钢铁等。马克思劳动价值论中只承认直接从事物质生产的活劳动才创造价值，而作为社会劳动凝结物的劳动手段和劳动对象是物化劳动，只能转移价值，同时也承认非劳动生产要素在价值创造中的作用。</p>
+            <button class="nc-modal-close">close modal!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nc-modal-overlay"></div>
+  <script type="text/javascript">
+    window.onload = function() {
+      var body = document.querySelector('body');
+      var overlay = document.querySelector('.nc-modal-overlay');
+      var slice = Array.prototype.slice;
+      var triggers = document.querySelectorAll('.nc-modal-trigger');
+      slice.call(triggers).forEach(function(ele, i) {
+        var modalId = ele.getAttribute('data-modalid');
+        console.log(modalId);
+        var modal = document.querySelector('#'+modalId);
+        var close = modal.querySelector('.nc-modal-close');
+
+        var removeModal = function() {
+          modal.classList.remove('nc-modal-show');
+          body.classList.remove('nc-body-show');
+        };
+
+        ele.addEventListener('click', function(e) {
+          modal.classList.add('nc-modal-show');
+          body.classList.add('nc-body-show');
+          overlay.removeEventListener('click', removeModal);
+          overlay.addEventListener('click', removeModal);
+        });
+
+        close.addEventListener('click', function(e) {
+          e.stopPropagation();
+          removeModal();
+        });
+      });
+    }
+  </script>
+</body>
+</html>
